@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
@@ -17,16 +17,27 @@ export default function CenteredTabs(e) {
 
     
   // }
+  
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
  
  
   function handleChange(event, newValue) {
+
     setValue(newValue);
   }
 
+  
+  const App = () => (
+  <div>
+    <h1>Currency Converter</h1>
+  </div>
+);
+
   return (
     <Paper className={classes.root}>
+      
+      <div>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -39,6 +50,8 @@ export default function CenteredTabs(e) {
         {e.Tab3 && <Tab label={e.Tab2} />}
         
       </Tabs>
+      </div>
     </Paper>
   );
 }
+
