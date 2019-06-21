@@ -1,57 +1,78 @@
-import React,{Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import MyRequests from './Myrequest'
+import Resturants from '../Components/Hotels'
 
-const useStyles = makeStyles({
+
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+function LinkTab(props) {
+  return (
+    <Tab
+      component="a"
+      onClick={event => {
+        event.preventDefault();
+      }}
+      {...props}
+    />
+  );
+}
+
+const display = () =>
+{
+  console.log(">>>>>>>")
+  return(
+    <h1>HAseeb</h1>
+   
+  )
+}
+
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
   },
-});
+}));
 
-export default function CenteredTabs(e) {
-
-  // constructor(props) {
-  //   super(props)
-
-    
-  // }
-  
+export default function NavTabs(e) {
   const classes = useStyles();
+  const data = display();
   const [value, setValue] = React.useState(0);
- 
- 
-  function handleChange(event, newValue) {
 
+  console.log(e.Tab1)
+  function handleChange(event, newValue) {
     setValue(newValue);
   }
 
   
-  const App = () => (
-  <div>
-    <h1>Currency Converter</h1>
-  </div>
-);
 
   return (
-    <Paper className={classes.root}>
-      
-      <div>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
-        <Tab label={e.Tab1} />
-        <Tab label={e.Tab2} />
-        {e.Tab3 && <Tab label={e.Tab2} />}
-        
-      </Tabs>
-      </div>
-    </Paper>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Tabs variant="fullWidth" value={value} onChange={handleChange}>
+          <LinkTab label={e.Tab1} href="/drafts" />
+          <LinkTab label={e.Tab2} href="/trash" />
+          <LinkTab label="Page Three" href="/spam" />
+        </Tabs>
+      </AppBar>
+      {value === 0 && <Resturants/>}
+      {value === 1 && <MyRequests/>}
+      {value === 2 && <TabContainer>Pending</TabContainer>}
+    </div>
   );
 }
-

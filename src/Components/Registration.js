@@ -20,6 +20,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from './login'
 import { Select } from '@material-ui/core';
+import {RegisterUser } from './Firebase/Authentication'
 
 function MadeWithLove() {
   return (
@@ -32,9 +33,36 @@ function MadeWithLove() {
     </Typography>
   );
 }
+const UserData = { 
+  name : "",
+  email : "",
+  password : "",
+  Cpassword: "",
+  age : "",
+  gender : ""
+  
 
-function Register() {
-  console.log("Hello WOwrld");
+}
+
+
+
+
+function Register(e) {
+ 
+  //   UserData.name = document.getElementById("fullName").value;
+  //   UserData.email = document.getElementById("email").value;
+ 
+  //   UserData.age = document.getElementById("age").value; 
+  
+  //   UserData.password =document.getElementById("password").value; 
+  
+  //   UserData.Cpassword = document.getElementById("cpassword").value; 
+ 
+    
+  
+  // RegisterUser(UserData)
+  // let img = document.getElementById("files").files[0];
+  console.log("Hello WOwrld",e);
 }
 
 const useStyles = makeStyles(theme => ({
@@ -63,29 +91,52 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
 export default function SignUp(e) {
   
   const classes = useStyles();
-
-
+  
   const [value, setValue] = React.useState('female');
 
   function handleChange(event) {
+    UserData.gender = event.target.value;
+   
     setValue(event.target.value);
+    
+  
+   
   }
 
- 
+  
     function ShowLoginForm(e) {
       e.preventDefault();
-      console.log('The link was clicked.');
+    
       return(
         <Login/>
       )
     }
+    
+    
 
-  
+    // async fetchData() {
+
+    //   var Email = this.refs.email.value;
+    //   var Passsword = this.refs.password.value;
+    
+        
+    //   // const {email, password} = this.state;
+    //     try {
+    //         const result = await SignUp(Email, Passsword);
+    //         console.log(result);
+    //     } catch (e) {
+    
+    //     } finally {
+    //         this.setState({loading: false})
+    //     }
+    // }
 
   return (
+    
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -107,6 +158,7 @@ export default function SignUp(e) {
                 id="fullName"
                 label="Full Name"
                 autoFocus
+                
               />
             </Grid>
             
@@ -119,11 +171,12 @@ export default function SignUp(e) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+            
                 // ref={this.emailRef}
               />
             </Grid>
 
-            <Grid item xs={12}>
+            {e.Title == "Returants Registration Form" && <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -134,9 +187,9 @@ export default function SignUp(e) {
                 name="age"
                 autoComplete="age"
                 type = "age"
-                // ref={this.emailRef}
+              
               />
-            </Grid>
+            </Grid>}
 
         
 
@@ -150,6 +203,7 @@ export default function SignUp(e) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+              
               />
             </Grid>
 
@@ -160,22 +214,23 @@ export default function SignUp(e) {
                 fullWidth
                 name="cpassword"
                 label="Confirm Password"
-                type="cpassword"
+                type="password"
                 id="cpassword"
                 autoComplete="current-password"
+              
               />
             </Grid>
             <FormControl component="fieldset" className={classes.formControl}>
-             <FormLabel component="legend">Gender</FormLabel>
-              <RadioGroup
+            {e.Title == "Returants Registration Form" &&  <FormLabel component="legend">Gender</FormLabel>}
+            <RadioGroup
                 aria-label="Gender"
                 name="gender1"
                 className={classes.group}
                 value={value}
                 onChange={handleChange}
               >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
+          {e.Title == "Returants Registration Form" &&  <FormControlLabel value="female" control={<Radio />} label="Female" />}
+          {e.Title == "Returants Registration Form" &&  <FormControlLabel value="male" control={<Radio />} label="Male" />}
 
           <FormControl className={classes.formControl}>
           <FormLabel component="legend">Select Country </FormLabel>
@@ -193,7 +248,7 @@ export default function SignUp(e) {
           </Select>
          
 
-          <FormLabel component="legend">Select City </FormLabel>
+           <FormLabel component="legend">Select City </FormLabel>
           <Select
             value="abc"
             // onChange={this.handleChange1}
@@ -211,6 +266,20 @@ export default function SignUp(e) {
         </RadioGroup>
       </FormControl>
 
+      <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="Image "
+              
+                type="file"
+                id="files"
+                autoComplete="files"
+              
+              />
+            </Grid> 
+
 
             <Grid item xs={12}>
               <FormControlLabel
@@ -219,6 +288,8 @@ export default function SignUp(e) {
               />
             </Grid>
           </Grid>
+           
+            {/* {  e.Title != "User Registration Form" && */}
           <Button
             type="submit"
             fullWidth

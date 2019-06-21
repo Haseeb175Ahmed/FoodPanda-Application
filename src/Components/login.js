@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import {Login } from './Firebase/Authentication'
 
 function MadeWithLove() {
   return (
@@ -54,6 +55,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function SignIN() {
+ 
+var email = document.getElementById("email").value;
+
+var password =document.getElementById("password").value; 
+
+  
+console.log("Hello WOwrld",password);
+Login(email, password);
+
+}
+
 export default function SignInSide() {
   const classes = useStyles();
 
@@ -69,7 +82,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          {/* <form className={classes.form} noValidate> */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -104,6 +117,7 @@ export default function SignInSide() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick = {SignIN}
             >
               Sign In
             </Button>
@@ -122,7 +136,7 @@ export default function SignInSide() {
             <Box mt={5}>
               <MadeWithLove />
             </Box>
-          </form>
+          {/* </form> */}
         </div>
       </Grid>
     </Grid>

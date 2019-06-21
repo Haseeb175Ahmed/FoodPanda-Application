@@ -3,6 +3,7 @@ import Registration from './Components/Registration'
 import DashBoard from './Components/DashBoard'
 import Login from './Components/login'
 
+import './App.css'
 class App extends Component {
 
   constructor() {
@@ -19,15 +20,16 @@ class App extends Component {
   
     return (
 
-      <div className="App">
-        <header className="App-header">
+      <div >
+        {/* <header className="App-header">
 
-        </header>
+        </header> */}
 
        
-      <DashBoard Tab1 = "Restaurants "   Tab2 = "My Requests"/>
+      {/* <DashBoard Tab1 = "Restaurants "   Tab2 = "My Requests"/> */}
       {/* <DashBoard Tab1 = "Pending "   Tab2 = "In Progress" Tab3 = "Delivered"/> */}
-      {/* <Registration Title = "Registration Form"/> */}
+      <Registration Title = "User Registration Form" fields = "User"/>
+      {/* <Login/> */}
       
         </div>
 
@@ -47,11 +49,3 @@ export default App;
 
 
 
-// gender
-// age
-// country
-// city
-
-
-
-{/* <img src={logo} className="App-logo" alt="logo" /> */}

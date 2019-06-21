@@ -1,6 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase'
 import { resolve } from 'url';
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 
 const firebaseConfig = {
@@ -46,37 +47,61 @@ const firebaseConfig = {
   }
 
 
-  function SignUp(email, password) 
+  function RegisterUser(userDetail) 
   {
     return new Promise (() =>
     {
-      
-      
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((user) => {
-                let userDetail = {
-                    username: name,
-                    useremail: user.email,
-                    useruid: user.uid
-                }
-                 console.log(userDetail)
-                name = this.refs.txtName.value = '';
-                email = this.refs.txtEmail.value = '';
-                password = this.refs.txtPassword.value = ''; 
-               firebase.database().ref('users/' + user.uid).set(userDetail)
-                .then(() => 
-                    console.log("SignUp Completed"
-                
-                ));
-            })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                this.toggleErrorMessage();
-                this.setState({ errormessage: errorMessage });
-            });
-    // })
- 
+      firebase.auth()
+        .createUserWithEmailAndPassword(userDetail.email, userDetail.password)
+        .then((success) => {
+           
+            let userId = firebase.auth().currentUser.uid;
+            firebase.database().ref("users/" + userId)
+                .set(userDetail)
+                .then(() => {
+                  console.log("Inserted");
+                  alert("Inserted");
+                  
+                  return(<img src={ require('../../images/img_3.jpg') } alt="Image" class="img-fluid"/>
+           
+                    //     <SweetAlert 
+                    //     success 
+                    //     title= "Welconme"
+                    //       text= "You can use this email to procceed further features"
+                    //       icon= "success"
+                    //       button= "Done"
+                    //     onConfirm={() => this.hideAlert()}
+                    //   >
+                    //     Hello world!
+                    // </SweetAlert>
+                )
+                    // document.getElementById("loaders").style.display = 'none';
+                    // swal({
+                        // title: "Welconme",
+                        // text: "You can use this email to procceed further features",
+                        // icon: "success",
+                        // button: "Done",
+                    // })
+                    
+                   
+                })
+        })
+        .catch(function (error) {
+            // Handle Errors here.
+            // document.getElementById("loaders").style.display = 'none';
+            // var errorCode = error.code;
+            var errorMessage = error.message;
+            // swal({
+            //     title: "Error",
+            //     text: errorMessage,
+            //     icon: "error",
+            //     button: "Ok",
+            // });
+            // ...
+        });
+})
+}
+  export {
+    Login,
+    RegisterUser
   }
-
-
