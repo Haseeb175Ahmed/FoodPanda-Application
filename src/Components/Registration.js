@@ -21,7 +21,7 @@ import Container from '@material-ui/core/Container';
 import Login from './login'
 import { Select } from '@material-ui/core';
 import {RegisterUser } from './Firebase/Authentication'
-
+import Map from './GoogleMap'
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -49,19 +49,19 @@ const UserData = {
 
 function Register(e) {
  
-  //   UserData.name = document.getElementById("fullName").value;
-  //   UserData.email = document.getElementById("email").value;
+    // UserData.name = document.getElementById("fullName").value;
+    // UserData.email = document.getElementById("email").value;
  
-  //   UserData.age = document.getElementById("age").value; 
+    // UserData.age = document.getElementById("age").value; 
   
-  //   UserData.password =document.getElementById("password").value; 
+    // UserData.password =document.getElementById("password").value; 
   
-  //   UserData.Cpassword = document.getElementById("cpassword").value; 
+    // UserData.Cpassword = document.getElementById("cpassword").value; 
  
     
   
-  // RegisterUser(UserData)
-  // let img = document.getElementById("files").files[0];
+  RegisterUser(UserData)
+  let img = document.getElementById("files").files[0];
   console.log("Hello WOwrld",e);
 }
 
@@ -238,7 +238,7 @@ export default function SignUp(e) {
             value="abc"
             // onChange={this.handleChange1}
             displayEmpty
-            name="age"
+            name="country"
             className={classes.selectEmpty}
           >
             
@@ -250,10 +250,10 @@ export default function SignUp(e) {
 
            <FormLabel component="legend">Select City </FormLabel>
           <Select
-            value="abc"
+            value=""
             // onChange={this.handleChange1}
             displayEmpty
-            name="age"
+            name="city"
             className={classes.selectEmpty}
           >
            
@@ -279,7 +279,7 @@ export default function SignUp(e) {
               
               />
             </Grid> 
-
+           
 
             <Grid item xs={12}>
               <FormControlLabel
@@ -288,7 +288,11 @@ export default function SignUp(e) {
               />
             </Grid>
           </Grid>
-           
+
+          <Grid item xs= {12}>
+          {/* <Map/> */}
+          </Grid>
+         
             {/* {  e.Title != "User Registration Form" && */}
           <Button
             type="submit"
