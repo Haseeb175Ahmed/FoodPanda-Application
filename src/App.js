@@ -1,57 +1,59 @@
-import React,{Component} from 'react';
-import Registration from './Components/Registration'
-import DashBoard from './Components/DashBoard'
-import Login from './Components/login'
-import Map from './Components/GoogleMap'
-import Main from './Components/Main'
+import React from 'react';
 
-import './App.css'
-class App extends Component {
+import { store, persistor } from '../src/Store'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
-  constructor() {
-    super();
+import Dashboard from '../src/Components/DashBoard'
 
-    this.state = {
-      
+// import food from './food.png'
+// import food2 from './food2.jpg'
+// import UserRegistrationForm from '../src/Components/UserRegistrationForm'
+// import RestarauntsRegistrationForm from '../src/Components/RestarauntsRegistrationForm'
+// import Login from '../src/Config/firebase'
+import Navigations from '../src/config/router'
+
+
+
+
+
+
+
+class App extends React.Component {
+    constructor(){
+      super();
+      this.state = {
+        login : false,
+  
       }
- }
-
- 
-
   
-  render() {
+      // this.Login = this.Login.bind(this);
+   
+    }
 
-    // const{data} = this.state;
-  
-    return (
 
-      <div >
-        {/* <header className="App-header">
 
-        </header> */}
 
-       
-      {/* <DashBoard Tab1 = "Restaurants "   Tab2 = "My Requests"/> */}
-      {/* <DashBoard Tab1 = "Pending "   Tab2 = "In Progress" Tab3 = "Delivered"/> */}
-      {/* <Registration Title = "User Registration Form"/> */}
-      <Main/>
-      {/* <Login/> */}
-  
+
+render() {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="App">
+          <header className="App-header">
+          
+
+
+            <div className="display">
+              <Navigations />
+            </div>
+            {/* <Dashboard Tab1 = "Resturants "   Tab2 = "Pending" Tab3 = "In Progress"/> */}
+          </header>
         </div>
-
-     
-
-        
-    );
-  }
+      </PersistGate>
+    </Provider>
+  );
+}
 }
 
 export default App;
-
-
-
-
-
-
-
-

@@ -35,11 +35,11 @@ function LinkTab(props) {
 
 const display = () =>
 {
-  console.log(">>>>>>>")
-  return(
-    <h1>HAseeb</h1>
+  // console.log(">>>>>>>")
+  // return(
    
-  )
+   
+  // )
 }
 
 const useStyles = makeStyles(theme => ({
@@ -54,7 +54,7 @@ export default function NavTabs(e) {
   const data = display();
   const [value, setValue] = React.useState(0);
 
-  console.log(e.Tab1)
+  // console.log(e.Tab1)
   function handleChange(event, newValue) {
     setValue(newValue);
   }
@@ -65,8 +65,8 @@ export default function NavTabs(e) {
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
-          <LinkTab label={e.Tab1} href="/drafts" />
-          <LinkTab label={e.Tab2} href="/trash" />
+          <LinkTab label="Resturants" href="/drafts" />
+          <LinkTab label="My Requests" href="/trash" />
           <LinkTab label="Page Three" href="/spam" />
         </Tabs>
       </AppBar>

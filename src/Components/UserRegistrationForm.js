@@ -7,8 +7,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -19,50 +17,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from './login'
-import { Select } from '@material-ui/core';
-import {RegisterUser } from './Firebase/Authentication'
-
-function MadeWithLove() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Built with love by the '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Material-UI
-      </Link>
-      {' team.'}
-    </Typography>
-  );
-}
-const UserData = { 
-  name : "",
-  email : "",
-  password : "",
-  Cpassword: "",
-  age : "",
-  gender : ""
-  
-
-}
+import {UserForm} from '../config/firebase'
 
 
-
-
-function Register() {
- 
-    UserData.name = document.getElementById("fullName").value;
-    UserData.email = document.getElementById("email").value;
- 
-    UserData.age = document.getElementById("age").value; 
-  
-    UserData.password =document.getElementById("password").value; 
-  
-    UserData.Cpassword = document.getElementById("cpassword").value; 
- 
-    
-  console.log("Hello WOwrld",UserData);
-
-  RegisterUser(UserData)
-}
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -90,23 +47,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-
 export default function SignUp(e) {
   
   const classes = useStyles();
-  
+
+
   const [value, setValue] = React.useState('female');
 
   function handleChange(event) {
-    UserData.gender = event.target.value;
-   
     setValue(event.target.value);
-    
-  
-   
   }
 
-  
+ 
     function ShowLoginForm(e) {
       e.preventDefault();
       console.log('The link was clicked.');
@@ -115,32 +67,17 @@ export default function SignUp(e) {
       )
     }
 
-    
-
-    // async fetchData() {
-
-    //   var Email = this.refs.email.value;
-    //   var Passsword = this.refs.password.value;
-    
-        
-    //   // const {email, password} = this.state;
-    //     try {
-    //         const result = await SignUp(Email, Passsword);
-    //         console.log(result);
-    //     } catch (e) {
-    
-    //     } finally {
-    //         this.setState({loading: false})
-    //     }
-    // }
+  
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+    
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        <h1 className="AppName2">USER REGISTRATION FORM</h1>
         <Typography component="h1" variant="h5">
          {e.Title}
         </Typography><br/>
@@ -153,10 +90,9 @@ export default function SignUp(e) {
                 variant="outlined"
                 required
                 fullWidth
-                id="fullName"
+                id="fullName1"
                 label="Full Name"
                 autoFocus
-                
               />
             </Grid>
             
@@ -165,11 +101,10 @@ export default function SignUp(e) {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
+                id="email2"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-            
                 // ref={this.emailRef}
               />
             </Grid>
@@ -185,7 +120,7 @@ export default function SignUp(e) {
                 name="age"
                 autoComplete="age"
                 type = "age"
-              
+                // ref={this.emailRef}
               />
             </Grid>
 
@@ -199,9 +134,8 @@ export default function SignUp(e) {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
+                id="password2"
                 autoComplete="current-password"
-              
               />
             </Grid>
 
@@ -210,16 +144,17 @@ export default function SignUp(e) {
                 variant="outlined"
                 required
                 fullWidth
-                name="cpassword"
+                name="Confirmpassword"
                 label="Confirm Password"
-                type="cpassword"
-                id="cpassword"
+                type="password"
+                id="password3"
                 autoComplete="current-password"
-              
               />
             </Grid>
-            <FormControl component="fieldset" className={classes.formControl}>
-             <FormLabel component="legend">Gender</FormLabel>
+            
+            <br/>
+            <FormControl component="fieldset"    className={classes.formControl}>
+             {/* <FormLabel component="legend">Gender</FormLabel> */}
               <RadioGroup
                 aria-label="Gender"
                 name="gender1"
@@ -227,45 +162,53 @@ export default function SignUp(e) {
                 value={value}
                 onChange={handleChange}
               >
+          <FormControlLabel  value="male" control={<Radio />} label="Male" />     
           <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-
-          <FormControl className={classes.formControl}>
-          <FormLabel component="legend">Select Country </FormLabel>
-          <Select
-            value="abc"
-            // onChange={this.handleChange1}
-            displayEmpty
-            name="age"
-            className={classes.selectEmpty}
-          >
-            
-            <MenuItem value={1}>Pakistan</MenuItem>
-            <MenuItem value={2}>Dubai</MenuItem>
-            <MenuItem value={3}>Turkey</MenuItem>
-          </Select>
+    
+          </RadioGroup>
          
+          <FormControl className={classes.formControl}>
+         
+      
+           <div >
+            
+             <label >
+                    <span>Country:</span></label>
 
-          <FormLabel component="legend">Select City </FormLabel>
-          <Select
-            value="abc"
-            // onChange={this.handleChange1}
-            displayEmpty
-            name="age"
-            className={classes.selectEmpty}
-          >
-           
-            <MenuItem value={1}>Lahore</MenuItem>
-            <MenuItem value={2}>Karachi</MenuItem>
-            <MenuItem value={3}>Islamabad</MenuItem>
-          </Select>
+                    <select id="country">
+                            
+                             <option value="Pakistan">Pakistan  </option>
+                             <option value="Turkey">Turkey</option>
+                             <option value="Dubai">Dubai</option>
+                             <option value="America">America</option>
+                             <option value="Iran">Iran</option>
+                        
+                           </select>
+      
+         </div>
+
+         <br/>  
+          <div >
+            
+             <label >
+                     <span>City:</span></label>
+
+                    <select id="city">
+                           <option value="Karachi">Karachi  </option>
+                           <option value="Islamabad">Islamabad</option>
+                           <option value="Lahore">Lahore</option>
+                           <option value="Sharjah">Sharjah</option>
+                           <option value="Los-Angeles">Los-Angeles</option>
+                        
+                          </select>
+          </div> 
         </FormControl>
 
-        </RadioGroup>
+        
       </FormControl>
-
-
-            <Grid item xs={12}>
+      <br/>
+      
+            <Grid item xs={12}> 
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
@@ -278,7 +221,7 @@ export default function SignUp(e) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick = {Register}
+            onClick = {()=>UserForm()}
            
           >
             Sign Up
@@ -293,8 +236,9 @@ export default function SignUp(e) {
         {/* </form> */}
       </div>
       <Box mt={5}>
-        <MadeWithLove />
+       
       </Box>
     </Container>
   );
 }
+

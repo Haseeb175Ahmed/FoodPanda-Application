@@ -1,168 +1,148 @@
-import React,{Component} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
+import React from 'react';
+import Search from '../Components/SearchInput'
+import { store, persistor } from '../Store'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
+import './css/hotel.css'
+import {GetResturants} from '../config/firebase'
+// import './css/display.css'
 
-import './css/style.css'
-
-// import './App.css'
-
-class DashBoard extends Component {
-
-  constructor() {
-    super();
-
-    this.state = {
-      
-      }
-
-      // const useStyles = makeStyles({
-      //   root: {
-      //     padding: '2px 4px',
-      //     display: 'flex',
-      //     alignItems: 'center',
-      //     width: 400,
-      //   },
-      //   input: {
-      //     marginLeft: 8,
-      //     flex: 1,
-      //   },
-      //   iconButton: {
-      //     padding: 10,
-      //   },
-      //   divider: {
-      //     width: 1,
-      //     height: 28,
-      //     margin: 4,
-      //   },
-      // });
- }
-
+class DisplayResturants extends React.Component {
+    constructor(){
+      super();
+      this.state = {
+       
+        selectedPolice : "",
+        data : "",
+       
+        
+    }
   
-  render() {
+      this.fetchData.bind();
+
+        this.DisplayData.bind();
    
-    
-    const classes = makeStyles({
-      root: {
-        padding: '2px 4px',
-        display: 'flex',
-        alignItems: 'center',
-        width: 400,
-      },
-      input: {
-        marginLeft: 8,
-        flex: 1,
-      },
-      iconButton: {
-        padding: 10,
-      },
-      divider: {
-        width: 1,
-        height: 28,
-        margin: 4,
-      },
-    });
+    }
 
-    // const{data} = this.state;
-  
-    return (
-//room//
+    componentDidMount() {
+        console.log('The state has been updated.') 
+        this.fetchData();
 
+    }
 
-
-   //room ///
-      <div class="site-wrap">
-
-
-<Paper className={classes.root}>
-<IconButton className={classes.iconButton} aria-label="Menu">
-  <MenuIcon />
-</IconButton>
-<InputBase
-  className={classes.input}
-  placeholder="Search Your Resturants"
-  inputProps={{ 'aria-label': 'Search Google Maps' }}
-/>
-
-<Divider className={classes.divider} />
-
-</Paper>
-      <div class="site-section bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 mx-auto text-center mb-5 section-heading">
-            <h2 class="mb-5">Resturants </h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-5">
-            <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src={ require('../images/img_1.jpg') }  alt="Image" class="img-fluid"/></a>
-              <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">Kolachi Resturants</a></h3>
-                <strong class="price">$350.00 / per night</strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-5">
-            <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src={ require('../images/img_2.jpg') } alt="Image" class="img-fluid"/></a>
-              <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">Balochistan SAjji</a></h3>
-                <strong class="price">$400.00 / per night</strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-5">
-            <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src={ require('../images/img_3.jpg') } alt="Image" class="img-fluid"/></a>
-              <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">Bolan Sajji</a></h3>
-                <strong class="price">$255.00 / per night</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5">
-            <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src={ require('../images/img_4.jpg') } alt="Image" class="img-fluid"/></a>
-              <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">Macdonalds </a></h3>
-                <strong class="price">$150.00 / per night</strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-5">
-            <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src={ require('../images/img_5.jpg') } alt="Image" class="img-fluid"/></a>
-              <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">KFC</a></h3>
-                <strong class="price">$200.00 / per night</strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-5">
-            <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src={ require('../images/img_1.jpg') } alt="Image" class="img-fluid"/></a>
-              <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">Salaatin</a></h3>
-                <strong class="price">$155.00 / per night</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-      </div>
+    DisplayData(resturants) {
       
-    );
-  }
+        const { selectedPolice } = this.state;
+      
+        this.setState({
+
+            data: resturants
+        }, () => { console.log('The state has been updated.') })
+      
+
+        console.log(",,,,,,,,,,",selectedPolice);
+    }
+
+    async fetchData() {
+        
+        try {
+            console.log('The state has been fetch.') 
+
+            var resturants = await GetResturants(); 
+          
+            console.log("rEsturants >>>>>>1",resturants);
+           
+            //  this.setState({
+
+            //     data: resturants
+            // }, () => { console.log('The state has been updated.') })
+          
+            console.log("rEsturants >>>>>>2",resturants);
+            this.DisplayData(resturants)
+         
+            
+
+        } catch (error) {
+
+        }
+        finally {
+
+            // this.setState({
+
+            //     data: resturants
+            // })
+
+        }
+    }
+
+   
+render() {
+    const{data} = this.state
+
+    console.log("render.........",data);
+
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="App">
+          <header className="App-header">
+          
+
+          <div className="container">
+    <br/>
+	<div className="row justify-content-center">
+                        <div className="col-12 col-md-10 col-lg-8">
+                            <form className="card card-sm">
+                                <div className="card-body row no-gutters align-items-center">
+                                    <div className="col-auto">
+                                        <i className="fas fa-search h4 text-body"></i>
+                                    </div>
+                                   
+                                    <div className="col">
+                                        <input className="form-control form-control-lg form-control-borderless" id = "search" type="search" placeholder="Search topics or keywords"/>
+                                    </div>
+                                 
+                                    <div className="col-auto">
+                                        <button className="btn" type="">Search</button>
+                                    </div>
+
+                                    <div className="col-auto">
+                                        <button className="btn" type="">Rating</button>
+                                    </div>
+                                  
+                                </div>
+                            </form>
+                        </div>
+                       
+                    </div>
+              </div>
+          </header>
+<br/>
+          <div className = "">
+            <div className = "row1">
+             <div className="column">
+             <img src={ require('../images/img_1.jpg') }  className= "img"/>  
+                         <p><b>Name</b> : HASeeb</p>
+                          <p><b>Adress</b> : category.</p>
+                          <p><b>Email</b> :ProductsData[key]</p>
+                          
+         </div>
+
+         <div className="column">
+             <img src={ require('../images/img_1.jpg') }  className= "img"/>  
+                         <p><b>Name</b> : HASeeb</p>
+                          <p><b>Adress</b> : category.</p>
+                          <p><b>Email</b> :ProductsData</p>
+                          
+         </div>
+         
+             </div>
+            </div>
+        </div>
+      </PersistGate>
+    </Provider>
+  );
+}
 }
 
-export default DashBoard;
+export default DisplayResturants;

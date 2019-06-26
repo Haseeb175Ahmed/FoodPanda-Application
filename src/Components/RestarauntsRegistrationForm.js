@@ -5,64 +5,17 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from './login'
-import { Select } from '@material-ui/core';
-import {RegisterUser } from './Firebase/Authentication'
+import {RestaurauntForm} from '../config/firebase'
 
-function MadeWithLove() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Built with love by the '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Material-UI
-      </Link>
-      {' team.'}
-    </Typography>
-  );
-}
-const UserData = { 
-  name : "",
-  email : "",
-  password : "",
-  Cpassword: "",
-  age : "",
-  gender : ""
-  
-
-}
-
-
-
-
-function Register() {
- 
-    UserData.name = document.getElementById("fullName").value;
-    UserData.email = document.getElementById("email").value;
- 
-    UserData.age = document.getElementById("age").value; 
-  
-    UserData.password =document.getElementById("password").value; 
-  
-    UserData.Cpassword = document.getElementById("cpassword").value; 
- 
-    
-  console.log("Hello WOwrld",UserData);
-
-  RegisterUser(UserData)
-}
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -90,23 +43,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-
 export default function SignUp(e) {
   
   const classes = useStyles();
-  
-  const [value, setValue] = React.useState('female');
 
-  function handleChange(event) {
-    UserData.gender = event.target.value;
-   
-    setValue(event.target.value);
-    
-  
-   
-  }
 
-  
+  // const [value, setValue] = React.useState('female');
+
+  // function handleChange(event) {
+  //   setValue(event.target.value);
+  // }
+
+ 
     function ShowLoginForm(e) {
       e.preventDefault();
       console.log('The link was clicked.');
@@ -115,48 +63,36 @@ export default function SignUp(e) {
       )
     }
 
-    
-
-    // async fetchData() {
-
-    //   var Email = this.refs.email.value;
-    //   var Passsword = this.refs.password.value;
-    
-        
-    //   // const {email, password} = this.state;
-    //     try {
-    //         const result = await SignUp(Email, Passsword);
-    //         console.log(result);
-    //     } catch (e) {
-    
-    //     } finally {
-    //         this.setState({loading: false})
-    //     }
-    // }
+  
 
   return (
+
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        
+    
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        <h1 className="AppName2">RESTAURANT REGISTRATION</h1>
         <Typography component="h1" variant="h5">
          {e.Title}
         </Typography><br/>
+
+       
         {/* <form className={classes.form} noValidate> */}
           <Grid container spacing={2}>
             <Grid item xs={12} >
               <TextField
                 autoComplete="fname"
-                name="fullName"
+                name="Restaurant Name"
                 variant="outlined"
                 required
                 fullWidth
-                id="fullName"
-                label="Full Name"
+                id="fullName2"
+                label="Restaurant Name"
                 autoFocus
-                
               />
             </Grid>
             
@@ -165,30 +101,13 @@ export default function SignUp(e) {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
+                id="email3"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-            
                 // ref={this.emailRef}
               />
             </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="age"
-                InputProps={{ inputProps: { min: 15, max: 70 } }}
-                label="Age"
-                name="age"
-                autoComplete="age"
-                type = "age"
-              
-              />
-            </Grid>
-
         
 
             <Grid item xs={12}>
@@ -199,12 +118,12 @@ export default function SignUp(e) {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
+                id="password5"
                 autoComplete="current-password"
-              
               />
             </Grid>
-
+            <br/>
+            <br/>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -212,58 +131,83 @@ export default function SignUp(e) {
                 fullWidth
                 name="cpassword"
                 label="Confirm Password"
-                type="cpassword"
-                id="cpassword"
+                type="password"
+                id="password4"
                 autoComplete="current-password"
-              
               />
             </Grid>
-            <FormControl component="fieldset" className={classes.formControl}>
-             <FormLabel component="legend">Gender</FormLabel>
-              <RadioGroup
-                aria-label="Gender"
-                name="gender1"
-                className={classes.group}
-                value={value}
-                onChange={handleChange}
-              >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-
-          <FormControl className={classes.formControl}>
-          <FormLabel component="legend">Select Country </FormLabel>
-          <Select
-            value="abc"
-            // onChange={this.handleChange1}
-            displayEmpty
-            name="age"
-            className={classes.selectEmpty}
-          >
+            <br/>
+            <Grid item xs={12}>
+              <TextField
+               
+                  label="Certificate"
+                variant="outlined"
+                required
+                fullWidth
+                name="Certificate"
             
-            <MenuItem value={1}>Pakistan</MenuItem>
-            <MenuItem value={2}>Dubai</MenuItem>
-            <MenuItem value={3}>Turkey</MenuItem>
-          </Select>
+                type="file"
+                id="file"
+                autoComplete=""
+              />
+            </Grid>
+            
+           
+            
+            <br/>
+            
+            <br/>
+            
+            <br/>
+            <FormControl component="fieldset" className={classes.formControl}>
+         
+            
+          <FormControl className={classes.formControl}>
          
 
-          <FormLabel component="legend">Select City </FormLabel>
-          <Select
-            value="abc"
-            // onChange={this.handleChange1}
-            displayEmpty
-            name="age"
-            className={classes.selectEmpty}
-          >
-           
-            <MenuItem value={1}>Lahore</MenuItem>
-            <MenuItem value={2}>Karachi</MenuItem>
-            <MenuItem value={3}>Islamabad</MenuItem>
-          </Select>
-        </FormControl>
 
-        </RadioGroup>
+         <div className="input-group">
+          
+           <label >
+                  <span>Country:</span></label>
+
+                  <select id="country">
+                          
+                           <option value="Pakistan">Pakistan  </option>
+                           <option value="Turkey">Turkey</option>
+                           <option value="Dubai">Dubai</option>
+                           <option value="America">America</option>
+                           <option value="Iran">Iran</option>
+                      
+                         </select>
+    
+       </div>
+         <br/>
+         {/* <FormLabel component="legend">Select City </FormLabel> */}
+         <div className="input-group">
+          
+           <label >
+                   <span>City:</span></label>
+
+                  <select id="city">
+                         <option value="Karachi">Karachi  </option>
+                         <option value="Islamabad">Islamabad</option>
+                         <option value="Lahore">Lahore</option>
+                         <option value="Sharjah">Sharjah</option>
+                         <option value="Los-Angeles">Los-Angeles</option>
+                      
+                        </select>
+        </div> 
       </FormControl>
 
+     
+   
+
+      </FormControl>
+<br/>
+<br/>
+<br/>
+<br/>
 
             <Grid item xs={12}>
               <FormControlLabel
@@ -278,7 +222,7 @@ export default function SignUp(e) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick = {Register}
+            onClick = {()=>RestaurauntForm()}
            
           >
             Sign Up
@@ -293,8 +237,10 @@ export default function SignUp(e) {
         {/* </form> */}
       </div>
       <Box mt={5}>
-        <MadeWithLove />
+       
       </Box>
     </Container>
   );
 }
+
+
