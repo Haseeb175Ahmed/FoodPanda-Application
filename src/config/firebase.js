@@ -1,5 +1,6 @@
 import React from 'react'
 import swal from 'sweetalert';
+import '../Components/css/Sign.css'
 
 import * as firebase from 'firebase';
   
@@ -51,6 +52,17 @@ class Login extends React.Component {
                     button: "Done",
                 })
                 .then(() => {
+                    let userUid = firebase.auth().currentUser.uid;
+                   
+                    var db = firebase.database().ref('Users/' + userUid+'/Orders');
+                    db.on('value', function(snapshot) {
+                    
+                     
+                      var Orders = Object.values(snapshot.val());
+                      console.log("Orders;111;",Orders);
+                      localStorage.setItem("Orders", JSON.stringify(Orders));
+                   
+                        })
                    this.props.history.push('/UserDashBoard');
                 })
             })
@@ -70,14 +82,14 @@ class Login extends React.Component {
     
     render() {
         return (
-            <div className="parent-box">
+            <div className="container">
                 <br/><br/><br/>
                 <h2 className="h2">Sign In</h2>
               
                <div className="white-box">
                    <div className='signup-childs'>
                       <strong>Email</strong><br/>
-                      <input id="email1" placeholder='Enter email'/>
+                      <input id="email1" placeholder='Enter email' type = 'text'/>
                    </div>
                    <div className='signup-childs'>
                       <strong>Password</strong><br/>
@@ -95,6 +107,11 @@ class Login extends React.Component {
                </div>
 
             </div>
+
+          
+
+  
+
         )
     }
 }
@@ -107,7 +124,7 @@ export default Login
             
     function UserForm() {
 
-        alert("chal gya")
+       
         let email = document.getElementById("email2").value;
         let fullName = document.getElementById("fullName1").value;
         
@@ -203,9 +220,8 @@ export default Login
                              
                             .then(() => {
                     
-                
-       
-                })
+                         
+                          })
             
                    })
                })
@@ -225,8 +241,9 @@ export default Login
                     button: "Done",
                 })
                 .then(() => {
-                    // window.location = '../pages/adminsignin.html'
+                    
                 })
+                // this.props.history.push('/login');
             })
         
                 .catch((error) => {
@@ -255,7 +272,7 @@ function GetResturants()
         
          
           var ProductsData = Object.values(snapshot.val());
-          console.log("Restaurants;111;",snapshot);
+          console.log("Restaurants;111;",ProductsData);
           localStorage.setItem("Resturants", JSON.stringify(ProductsData));
        
             })

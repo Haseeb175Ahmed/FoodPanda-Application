@@ -1,82 +1,112 @@
+
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { store, persistor } from '../Store'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
+import './css/hotel.css'
+import {GetResturants} from '../config/firebase'
+import Button from '@material-ui/core/Button/Button';
 
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+import Chip from '@material-ui/core/Chip';
+import { Table } from '@material-ui/core';
+  
+// import './css/display.css'
 
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
-}))(TableRow);
+class DisplayRequest extends React.Component {
+    constructor(){
+      super();
+     
+      this.state = {
+       
+        selectedPolice : "",
+        data : [],
+        limit : 1,
+       
+        
+    }
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+    
+  
+    }
 
-const rows = [
-  createData('Frozen yoghurt', 1, 6.0, 'Deliver'),
-  createData('Ice cream sandwich', 1, 6.0, 'Deliver'),
-  createData('Eclair',  1, 6.0, 'In Process'),
-  createData('Cupcake',  1, 6.0, 'Pending'),
-  createData('Gingerbread',  1, 6.0, 'Not Approved'),
-];
+    
+    
+    
+    DisplayData(resturants) {
+        
+        const { selectedPolice } = this.state;
+        
+       
+        
+        
+        console.log(",,,,,,,,,,",selectedPolice);
+    }
+    
+    componentDidMount() {
+      
+   
+        var Orders = localStorage.getItem("Orders");
+        var OrdersData= JSON.parse(Orders);
+        console.log(OrdersData);
+        
+        this.setState({
+            
+            data: OrdersData
+        })
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing(3),
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 700,
-  },
-}));
+    }
 
-export default function CustomizedTables() {
-  const classes = useStyles();
+render() {
+    const{data} = this.state
+   
+
+    const display = data.map((value,index) => {
+        return   (
+          <tr>
+      <td>{index+1}</td>
+      <td>{value.Resturant}</td>
+      <td>{value.Item}</td>
+      <td>{value.Quantity}</td>
+      <td>{value.Bill}</td>
+      <td>{value.Progress}</td>
+    </tr>
+        )
+  
+               
+    });   
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Item</StyledTableCell>
-            <StyledTableCell align="right">Quantity</StyledTableCell>
-            <StyledTableCell align="right">Price</StyledTableCell>
-            <StyledTableCell align="right">Progress</StyledTableCell>
-           
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="App">
+          <header className="App-header">
+          </header>
+
+        <div >
+  
+
+    <table id="customers">
+  <tbody>
+<tr>
+<th>Sno</th>
+  <th>Resturants</th>
+  <th>Item</th>
+  <th>Quantity</th>
+  <th>Bill</th>
+  <th>State</th>
+</tr>
+
+{display}
+
+</tbody>
+</table>
+
+        </div>
+        </div>
+      </PersistGate>
+    </Provider>
   );
 }
+}
+
+export default DisplayRequest;

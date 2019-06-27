@@ -5,7 +5,7 @@ import Login from '../config/firebase'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Start from '../Screens/login'
 import UserDashBoard from '../Components/DashBoard'
-
+import Details from '../Components/Details'
 function Navigations() {
     return (
         //this.props.history.push('/dashboard')
@@ -25,7 +25,8 @@ function Navigations() {
                 <Route  path="/UserRegistration" component={UserRegistrationForm} /> 
                 <Route  path="/RestarauntRegistration" component={RestaurantsRegistrationForm} /> 
                 <Route  path="/UserDashBoard" component={UserDashBoard} /> 
-                
+                <Route  path="/Details" component={Details} /> 
+               
                 {/* this.props.match.params.username */}
             </div>
         </Router>

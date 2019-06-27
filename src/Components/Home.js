@@ -105,6 +105,13 @@ export default function Album(e) {
                    
                   </Button>
                   </Grid>
+
+                  <Grid item>
+                  <Button variant="outlined" color="primary" onClick = {e.onClick2}>
+                  Register Resturants 
+                   
+                  </Button>
+                  </Grid>
               </Grid>
             </div>
           </Container>

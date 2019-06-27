@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import './css/hotel.css'
 import {GetResturants} from '../config/firebase'
 import Button from '@material-ui/core/Button/Button';
-
+import Details from './Details'
 import Chip from '@material-ui/core/Chip';
   
 // import './css/display.css'
@@ -19,6 +19,7 @@ class DisplayResturants extends React.Component {
         selectedPolice : "",
         data : [],
         limit : 1,
+        Orders : [],
        
         
     }
@@ -43,17 +44,30 @@ class DisplayResturants extends React.Component {
         
         console.log(",,,,,,,,,,",selectedPolice);
     }
+
+    Details() {
+    
+        this.props.history.push('/Details');
+            console.log("Detaisls")
+          }
+
     
     componentDidMount() {
       
         this.fetchData();
         var Resturants = localStorage.getItem("Resturants");
         var convertuserData= JSON.parse(Resturants);
+      
+        var Orders = localStorage.getItem("Orders");
+        var OrdersData= JSON.parse(Orders);
+        
         
         this.setState({
             
-            data: convertuserData
+            data: convertuserData,
+            Orders : OrdersData
         })
+      
 
     }
     async fetchData() {
@@ -118,18 +132,19 @@ class DisplayResturants extends React.Component {
     }
    
 render() {
-    const{data} = this.state
+    const{data,Orders} = this.state
     var temp = [...data]
     temp.length = this.state.limit;
-
+   
     const display = data.map((value,index) => {
         return   (
          <center>
                 <div className="column"> <br/><br/>
              <img src={value.file }  className= "img"/>  
-                         <p><b>Name</b> : {value.fullName}</p>
-                          <p><b>Adress</b> : {value.email}</p>
-                          <p><Button id="btn1" >order Now</Button></p>
+                         <p><b>Name</b>: {value.fullName}</p>
+                          <p><b>Address</b>: {value.city}</p>
+                          <p><b>Email</b>: {value.email}</p>
+                          <p><Button id="btn1" onClick={this.Details.bind(this)}>order Now</Button></p>
                           
          </div>
              </center>

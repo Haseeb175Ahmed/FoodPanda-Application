@@ -28,7 +28,7 @@ class Start extends React.Component {
         return (
             <div>
               
-                <Album onClick={this.UserRegistration.bind(this)} onClick1={this.login.bind(this)} />
+                <Album onClick={this.UserRegistration.bind(this)} onClick1={this.login.bind(this)} onClick2={this.RestarauntRegistration.bind(this)} />
               
           <br/>
           <br/>

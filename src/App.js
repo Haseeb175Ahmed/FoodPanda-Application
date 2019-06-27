@@ -8,8 +8,8 @@ import Dashboard from '../src/Components/DashBoard'
 
 // import food from './food.png'
 // import food2 from './food2.jpg'
-// import UserRegistrationForm from '../src/Components/UserRegistrationForm'
-// import RestarauntsRegistrationForm from '../src/Components/RestarauntsRegistrationForm'
+import UserRegistrationForm from '../src/Components/UserRegistrationForm'
+import RestarauntsRegistrationForm from '../src/Components/RestarauntsRegistrationForm'
 // import Login from '../src/Config/firebase'
 import Navigations from '../src/config/router'
 
