@@ -22,6 +22,7 @@ class Login extends React.Component {
     constructor(){
       super();
       this.state = {
+          Restaurants : [],
      
   
       }
@@ -243,9 +244,10 @@ export default Login
 
             }
 
-            function GetResturants() 
+function GetResturants() 
   {
-    return new Promise (() =>
+    //   const {Restaurants} = this.state;
+    return new Promise ((e) => 
     {
       
         var db = firebase.database().ref('Restaurants/');
@@ -253,8 +255,9 @@ export default Login
         
          
           var ProductsData = Object.values(snapshot.val());
-          
-      
+          console.log("Restaurants;111;",snapshot);
+          localStorage.setItem("Resturants", JSON.stringify(ProductsData));
+       
             })
             .catch((error) => {
                 var errorCode = error.code;

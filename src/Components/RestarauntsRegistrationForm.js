@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
+
 export default function SignUp(e) {
   
   const classes = useStyles();
@@ -54,17 +55,21 @@ export default function SignUp(e) {
   //   setValue(event.target.value);
   // }
 
+  
  
-    function ShowLoginForm(e) {
-      e.preventDefault();
-      console.log('The link was clicked.');
-      return(
-        <Login/>
-      )
-    }
+    // function ShowLoginForm(e) {
+    //   e.preventDefault();
+    //   console.log('The link was clicked.');
+    //   return(
+    //     <Login/>
+    //   )
+    // }
 
   
-
+    // login() {
+    
+    //   this.props.history.push('/login');
+    //     }
   return (
 
     <Container component="main" maxWidth="xs">
@@ -229,7 +234,7 @@ export default function SignUp(e) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2" onClick={ShowLoginForm}>
+              <Link href="#" variant="body2" onClick={this.props.history.push('/login')}>
                 Already have an account? Sign in
               </Link>
             </Grid>

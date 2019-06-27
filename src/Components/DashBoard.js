@@ -67,7 +67,7 @@ export default function NavTabs(e) {
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
           <LinkTab label="Resturants" href="/drafts" />
           <LinkTab label="My Requests" href="/trash" />
-          <LinkTab label="Page Three" href="/spam" />
+        
         </Tabs>
       </AppBar>
       {value === 0 && <Resturants/>}

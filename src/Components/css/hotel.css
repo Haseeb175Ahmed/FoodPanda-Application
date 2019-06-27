@@ -21,16 +21,26 @@
   border-radius: 10px;
   margin-right: 10px;
   margin-top: 10px;
-  background-color: darkblue;
+  background-color: rgb(16, 214, 99);
+}
+
+#btn1
+{
+    width: 100px;
+    height: 10%;
+  float: center;
+  border-radius: 20px;
+ 
+  background-color: rgb(63, 81, 181);
 }
 
 .img
 {
    height:100px;
-   width:120px;
+   width:160px;
    margin-bottom: 1px;
    margin-top: -10px;
-   /* margin-left: 10px; */
+   margin-left: 10px;
    /* padding-left: 10px; */
 }
 
@@ -39,13 +49,21 @@
     margin-left: 10px;
 }
 
+
+
+#search
+{
+  height: 45px;
+  border-color: rgb(63, 81, 181);
+}
 .row1 {
     display: -ms-flexbox; /* IE10 */
     display: flex;
     -ms-flex-wrap: wrap; /* IE10 */
     flex-wrap: wrap;
-    padding: 0 4px;
+    padding: 0 1px;
     margin-top: 20px;
+    margin-left: 10px;
   }
   
   /* Create four equal columns that sits next to each other */
@@ -65,7 +83,7 @@
   }
   
   /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 582px) {
+  @media screen and (max-width: 585px) {
     .column {
       -ms-flex: 100%;
       flex: 100%;

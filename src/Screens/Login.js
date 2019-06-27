@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Appbar from '../Components/AppBar';
+import Album  from '../Components/Home';
 class Start extends React.Component {
 
 
@@ -26,12 +27,13 @@ class Start extends React.Component {
     render() {
         return (
             <div>
-        
-                <h1 className="AppName">FOOD DELIVERY APP</h1>
+              
+                <Album onClick={this.UserRegistration.bind(this)} onClick1={this.login.bind(this)} />
+              
           <br/>
           <br/>
           
-                     <button className="btn1"  onClick={this.UserRegistration.bind(this)}><h2>User Registration</h2></button>
+                     {/* <button className="btn1"  onClick={this.UserRegistration.bind(this)}><h2>User Registration</h2></button>
                      <br/>
                    <br/>
                    <br/>
@@ -43,7 +45,7 @@ class Start extends React.Component {
                    
                    <button className="btn3" onClick={this.login.bind(this)}><h2>Sign In</h2></button>
                    <br/>
-                   <br/>
+                   <br/> */}
                
             </div>
         )

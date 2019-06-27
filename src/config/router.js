@@ -3,7 +3,7 @@ import UserRegistrationForm from '../Components/UserRegistrationForm'
 import RestaurantsRegistrationForm from '../Components/RestarauntsRegistrationForm'
 import Login from '../config/firebase'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Start from '../Screens/Login'
+import Start from '../Screens/login'
 import UserDashBoard from '../Components/DashBoard'
 
 function Navigations() {
