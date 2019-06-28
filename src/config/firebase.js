@@ -57,10 +57,12 @@ class Login extends React.Component {
                     var db = firebase.database().ref('Users/' + userUid+'/Orders');
                     db.on('value', function(snapshot) {
                     
-                     
-                      var Orders = Object.values(snapshot.val());
-                      console.log("Orders;111;",Orders);
-                      localStorage.setItem("Orders", JSON.stringify(Orders));
+                     if (snapshot.val() != null) {
+                         var Orders = Object.values(snapshot.val());
+                         console.log("Orders;111;",snapshot.val());
+                         localStorage.setItem("Orders", JSON.stringify(Orders));
+                         
+                     }
                    
                         })
                    this.props.history.push('/UserDashBoard');
@@ -135,7 +137,8 @@ export default Login
         let cpassword =document.getElementById("password3").value; 
         let country =document.getElementById("country").value;
         let city =document.getElementById("city").value;
-        // let gm =document.getElementById("gender").value;
+
+       
     
        
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -196,6 +199,7 @@ export default Login
                     cfpassword,
                     country,
                     city,
+                    
                    
                  
              } 
@@ -261,6 +265,51 @@ export default Login
 
             }
 
+
+        function Orders() {
+            var foodItem = document.getElementById("food_item").value;
+            var specialItemm = document.getElementById("special_item").value;
+            var foodQuatity = document.getElementById("food_quantity").value;
+            var deliveryType = document.getElementById("delivery_type").value;
+            var deliveryArea = document.getElementById("delivery_area").value;
+                
+            let  orderobj = {
+                    foodItem,
+                    specialItemm,
+                    foodQuatity,
+                    deliveryType,
+                    deliveryArea,
+                    bill : 500+"Rs"
+                    
+             } 
+             let userUid = firebase.auth().currentUser.uid;
+             firebase.database().ref('Users/' + userUid+"/Orders/").set(orderobj)
+             .then(() => {   
+                 swal({
+                     title: "Welcome",
+                     text: "You can use this email to procceed more features",
+                     icon: "success",
+                     button: "Done",
+                 })
+                 .then(() => {
+                     // window.location = '../pages/adminsignin.html'
+                 })
+             })
+       
+                 .catch((error) => {
+                     // var errorCode = error.code;
+                     var errorMessage = error.message;
+                     swal({
+                         title: "Error",
+                         text: errorMessage,
+                         icon: "error",
+                         button: "Ok",
+                     });
+                
+                 });
+             console.log("orderobj",orderobj);
+        }
+
 function GetResturants() 
   {
     //   const {Restaurants} = this.state;
@@ -286,6 +335,6 @@ function GetResturants()
      })
  
   }
-        export {Login,UserForm,RestaurauntForm,GetResturants}
+        export {Login,UserForm,RestaurauntForm,GetResturants,Orders}
 
            

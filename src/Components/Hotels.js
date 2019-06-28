@@ -7,6 +7,7 @@ import {GetResturants} from '../config/firebase'
 import Button from '@material-ui/core/Button/Button';
 import Details from './Details'
 import Chip from '@material-ui/core/Chip';
+import {withRouter} from 'react-router-dom'
   
 // import './css/display.css'
 
@@ -20,7 +21,8 @@ class DisplayResturants extends React.Component {
         data : [],
         limit : 1,
         Orders : [],
-       
+        toggle : false,
+       title : "",
         
     }
 
@@ -45,10 +47,16 @@ class DisplayResturants extends React.Component {
         console.log(",,,,,,,,,,",selectedPolice);
     }
 
-    Details() {
+    Details(e) {
     
         this.props.history.push('/Details');
-            console.log("Detaisls")
+        // this.setState({
+            
+           
+        //    toggle : true,
+        //    title :e.currentTarget.value
+        // })
+            
           }
 
     
@@ -132,9 +140,11 @@ class DisplayResturants extends React.Component {
     }
    
 render() {
-    const{data,Orders} = this.state
+    const{data,Orders,toggle,title} = this.state
     var temp = [...data]
     temp.length = this.state.limit;
+
+    console.log("Detaisls2",toggle)
    
     const display = data.map((value,index) => {
         return   (
@@ -144,7 +154,7 @@ render() {
                          <p><b>Name</b>: {value.fullName}</p>
                           <p><b>Address</b>: {value.city}</p>
                           <p><b>Email</b>: {value.email}</p>
-                          <p><Button id="btn1" onClick={this.Details.bind(this)}>order Now</Button></p>
+                          <p><Button id="btn1" value={value.fullName} onClick={this.Details.bind(this)}>order Now</Button></p>
                           
          </div>
              </center>
@@ -206,7 +216,7 @@ render() {
           <div className = "">
             <div className = "row1"  onScroll={ this.onScrolle.bind(this)} style={{height : '500px',border :'2px solid black ',overflow : 'scroll'}}>
            
-        {display}
+        {!toggle ? display : <Details Title = {title}/>}
        
          
              </div>
@@ -218,4 +228,4 @@ render() {
 }
 }
 
-export default DisplayResturants;
+export default withRouter(DisplayResturants);
