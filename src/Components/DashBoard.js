@@ -71,7 +71,7 @@ export default function NavTabs(e) {
         </Tabs>
       </AppBar>
       {value === 0 && <Resturants/>}
-      {value === 1 && <MyRequests/>}
+      {value === 1 && <MyRequests Title= "SADABAHAr"/>}
       {value === 2 && <TabContainer>Pending</TabContainer>}
     </div>
   );

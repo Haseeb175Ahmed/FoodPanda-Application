@@ -55,13 +55,13 @@ class Login extends React.Component {
                 .then(() => {
                     let userUid = firebase.auth().currentUser.uid;
                    
-                    var db = firebase.database().ref("Orders/"+userUid);
+                    var db = firebase.database().ref("Users/"+userUid+"/");
                     db.on('value', function(snapshot) {
-                    
+                        console.log("Orders321;",snapshot);
                      if (snapshot.val() != null ) {
                          var Orders = Object.values(snapshot.val());
-                         console.log("Orders;111;",snapshot.val());
-                         localStorage.setItem("Orders", JSON.stringify(Orders));
+                         console.log("Orders;111;",snapshot.val().orders);
+                         localStorage.setItem("Orders", JSON.stringify(snapshot.val().orders));
                         //  console.log(this.props);
                      }
                    
@@ -170,7 +170,15 @@ export default Login
                     button: "Done",
                 })
                 .then(() => {
-                    // window.location = '../pages/adminsignin.html'
+                    var db = firebase.database().ref('Restaurants/');
+                    db.on('value', function(snapshot) {
+                    
+                    
+                    var ProductsData = Object.values(snapshot.val());
+                    console.log("Restaurants;",ProductsData);
+                    localStorage.setItem("Resturants", JSON.stringify(ProductsData));
+       
+            })
                 })
             })
         })
@@ -190,7 +198,9 @@ export default Login
            
 
 
-            function RestaurauntForm(){
+ function RestaurauntForm()
+ {
+
                 let email = document.getElementById("email3").value;
                 let password3 = document.getElementById("password5").value;
                 let fullName = document.getElementById("fullName2").value; 
@@ -205,10 +215,9 @@ export default Login
                     cfpassword,
                     country,
                     city,
-                    
-                   
-                 
-             } 
+                } 
+
+                
 
                 let file = document.getElementById("file").files[0];
                
@@ -255,10 +264,21 @@ export default Login
 
                     
                 })
-                this.props.history.push('/login');
+                .then(() =>
+                {
+                    var db = firebase.database().ref('Restaurants/');
+                    db.on('value', function(snapshot) {
+                    
+                    
+                    var ProductsData = Object.values(snapshot.val());
+                    console.log("Restaurants;",ProductsData);
+                    localStorage.setItem("Resturants", JSON.stringify(ProductsData));
+                })
+                // this.props.history.push('/login');
                 
                 // this.props.history.push('/login');
             })
+        })
         
                 .catch((error) => {
                     // var errorCode = error.code;
@@ -275,53 +295,7 @@ export default Login
 
             }
 
-
-        function Orders() {
-            var foodItem = document.getElementById("food_item").value;
-            var specialItemm = document.getElementById("special_item").value;
-            var foodQuatity = document.getElementById("food_quantity").value;
-            var deliveryType = document.getElementById("delivery_type").value;
-            var deliveryArea = document.getElementById("delivery_area").value;
-                
-            let  orderobj = {
-                    foodItem,
-                    specialItemm,
-                    foodQuatity,
-                    deliveryType,
-                    deliveryArea,
-                    bill : 500+"Rs"
-                    
-             } 
-             let userUid = firebase.auth().currentUser.uid;
-             orderobj.uid = userUid;
-             firebase.database().ref("Orders/"+ + userUid).set(orderobj)
-             .then(() => {   
-                 swal({
-                     title: "Welcome",
-                     text: "You can use this email to procceed more features",
-                     icon: "success",
-                     button: "Done",
-                 })
-                 .then(() => {
-                     // window.location = '../pages/adminsignin.html'
-                 })
-             })
-       
-                 .catch((error) => {
-                     // var errorCode = error.code;
-                     var errorMessage = error.message;
-                     swal({
-                         title: "Error",
-                         text: errorMessage,
-                         icon: "error",
-                         button: "Ok",
-                     });
-                
-                 });
-             console.log("orderobj",orderobj);
-        }
-
-function GetResturants() 
+            function GetResturants() 
   {
     //   const {Restaurants} = this.state;
     return new Promise ((e) => 
@@ -347,9 +321,77 @@ function GetResturants()
  
   }
 
+function Orders() 
+    {
+            var foodItem = document.getElementById("food_item").value;
+            var specialItemm = document.getElementById("special_item").value;
+            var foodQuatity = document.getElementById("food_quantity").value;
+            var deliveryType = document.getElementById("delivery_type").value;
+            var deliveryArea = document.getElementById("delivery_area").value;
+            // var resturantName = document.getElementById("resturantName").value;
+            
+            // console.log("NAme",resturantName)
+                
+            let  orderobj = {
+                    foodItem,
+                    specialItemm,
+                    foodQuatity,
+                    deliveryType,
+                    deliveryArea,
+                    bill : 500+"Rs"
+                    
+             } 
+             let userUid = firebase.auth().currentUser.uid;
+             orderobj.uid = userUid;
+             firebase.database().ref("Users/"+userUid+"/orders/").set(orderobj)
+             .then(() => {   
+                 swal({
+                     title: "Welcome",
+                     text: "You can use this email to procceed more features",
+                     icon: "success",
+                     button: "Done",
+
+                     
+                 })
+                 .then(() => {
+                    var db = firebase.database().ref("Users/"+userUid+"/orders/");
+                   
+                    
+                //      if (orderobj != null ) {
+                //          var Orders = Object.values(snapshot.val());
+                //          console.log("Orders;111;",snapshot.val());
+                //          localStorage.setItem("Orders", JSON.stringify(orderobj));
+                //          console.log(this.props);
+                   
+                //  }
+
+                db.on('value', function(snapshot) {
+        
+         
+                    var Orders = Object.values(snapshot.val());
+                    console.log("Restaurants;111;",Orders);
+                    localStorage.setItem("Orders", JSON.stringify(Orders));
+                 
+                      })
+             })
+       
+                 .catch((error) => {
+                     // var errorCode = error.code;
+                     var errorMessage = error.message;
+                     swal({
+                         title: "Error",
+                         text: errorMessage,
+                         icon: "error",
+                         button: "Ok",
+                     });
+                
+                 });
+            //  console.log("orderobj",orderobj);
+        })
+}
+
    
 
 
         export {Login,UserForm,RestaurauntForm,GetResturants,Orders}
-
            

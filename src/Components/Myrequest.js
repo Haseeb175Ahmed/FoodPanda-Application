@@ -61,10 +61,26 @@ render() {
     const{data} = this.state
     console.log(data);
         
-
-    const display = data.map((value,index) => {
+  
+    const arr = [
+      {'resturants':'KFC','foodItem':'Chiicken Tikka','foodQuatity':'3','bill':'250'},
+      {'resturants':'Frontier','foodItem':'Chiicken Karahi','foodQuatity':'3kg','bill':'750'},
+      {'resturants':'DUA','foodItem':'Chiicken Makhni','foodQuatity':'1kg','bill':'550'},
+      {'resturants':'kababJee','foodItem':'Malai Botti','foodQuatity':'3','bill':'250'},
+      {'resturants':'Zahid Neehari','foodItem':'Chiicken neehari','foodQuatity':'1','bill':'800'},
+    ];
+    console.log(arr);
+    const display = arr.map((value,index) => {
         return   (
-        console.log(value)
+            <tr>
+              <td>{value.index}</td>
+              <td>{value.resturants}</td>
+              <td>{value.foodItem}</td>
+              <td>{value.foodQuatity}</td>
+              <td>{value.bill}</td>
+              <td>Pending</td>
+              
+            </tr>
         )
   
                

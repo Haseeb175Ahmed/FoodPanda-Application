@@ -66,7 +66,7 @@ render() {
           <div className = "column">
           <div className="online_food_delivery_box animated bounceInDown" id="input_box">
           <center> <p><img src={require("../images/11.png")}  className= "img"/> 
-          <h1> {this.props.Title}</h1></p></center><br/>
+          <h1 id = "rtName"></h1></p></center><br/>
           <form>
               <div className="form-group">
                   <select className="form-control" id="food_item"   onChange={this.finalCost.bind(10)}>
@@ -110,12 +110,12 @@ render() {
               <div className="form-group">
                 
                   <span id="result">0</span>
-                  <input type="button" value="SUBMIT" className="btn btn-primary" style={{float: 'right'}} id="ok"  onClick = {()=>Orders()}/>
+                  <input type="button" value="SUBMIT" className="btn btn-primary" style={{float: 'right'}} id="ok"   onClick = {()=>Orders()}/>
               </div>
           </form>
       </div>
 
-      <div className="result_box animated zoomIn" style={{display: 'none'}} id="okResult" onClick = {this.ok_result.bind()}>
+      <div className="result_box animated zoomIn" style={{display: 'none'}} id="okResult"  onClick = {this.ok_result.bind()}>
           <h3 className="result_box_text" id="ok_text"> Your order is successfully submitted. Please keep patience, we will come to you soon.<br/><br/><span> --  Thank You  -- </span></h3><br/>
       </div>
 
