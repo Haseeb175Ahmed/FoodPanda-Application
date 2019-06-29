@@ -135,7 +135,8 @@ export default function PrimarySearchAppBar() {
             <MailIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+       
+        
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="Show 11 new notifications" color="inherit">
@@ -172,20 +173,10 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-          FOOD DELIVERY APP
+          Food And Fun 
           </Typography>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'Search' }}
-            />
+           
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

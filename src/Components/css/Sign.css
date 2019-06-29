@@ -6,6 +6,16 @@ input[type=text], input[type=password] {
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
+
+  option
+  {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
   
   /* Set a style for all buttons */
   button {
@@ -15,14 +25,15 @@ input[type=text], input[type=password] {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 50%;
-    margin-left: 170px;
-    border-radius: 20px;
+    width: 20%;
+    margin-left: 100px;
+    border-radius: 30px;
   }
   
   /* Add a hover effect for buttons */
   button:hover {
     opacity: 0.8;
+    background-color: chocolate;
   }
   
   /* Extra style for the cancel button (red) */

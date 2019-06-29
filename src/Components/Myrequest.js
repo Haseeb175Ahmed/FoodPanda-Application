@@ -47,7 +47,8 @@ class DisplayRequest extends React.Component {
    
         var Orders = localStorage.getItem("Orders");
         var OrdersData= JSON.parse(Orders);
-        console.log(OrdersData);
+        console.log(Orders);
+        
         
         this.setState({
             
@@ -58,18 +59,12 @@ class DisplayRequest extends React.Component {
 
 render() {
     const{data} = this.state
-   
+    console.log(data);
+        
 
     const display = data.map((value,index) => {
         return   (
-          <tr>
-      <td>{index+1}</td>
-      <td>{value.Resturant}</td>
-      <td>{value.Item}</td>
-      <td>{value.Quantity}</td>
-      <td>{value.Bill}</td>
-      <td>{value.Progress}</td>
-    </tr>
+        console.log(value)
         )
   
                

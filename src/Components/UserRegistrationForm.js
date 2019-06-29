@@ -7,7 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import Link from '@material-ui/core/Link';
+import Link1 from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from './login'
+import {Link } from "react-router-dom";
 import {UserForm} from '../config/firebase'
 
 
@@ -226,11 +227,30 @@ export default function SignUp(e) {
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2" onClick={ShowLoginForm}>
+
+          <Link to="/login">
+   
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            
+            >
+            login
+          </Button>
+
+            </Link>
+
+          
+
+          <Link to="/login" variant="body2" >
                 Already have an account? Sign in
               </Link>
+          <Grid container justify="flex-end">
+            <Grid item>
+            
             </Grid>
           </Grid>
         {/* </form> */}

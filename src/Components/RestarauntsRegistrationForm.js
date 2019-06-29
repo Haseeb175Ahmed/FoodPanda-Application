@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import Link1 from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Login from './login'
+import {Link } from "react-router-dom";
 import {RestaurauntForm} from '../config/firebase'
 
 
@@ -80,7 +81,7 @@ export default function SignUp(e) {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <h1 className="AppName2">RESTAURANT REGISTRATION</h1>
+       <center> <h1 className="AppName2">RESTAURANT REGISTRATION</h1></center>
         <Typography component="h1" variant="h5">
          {e.Title}
         </Typography><br/>
@@ -232,11 +233,25 @@ export default function SignUp(e) {
           >
             Sign Up
           </Button>
+          <Link to="/login">
+   
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            
+            >
+            login
+          </Button>
+
+            </Link>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2" >
+              <Link1 href="#" variant="body2" >
                 Already have an account? Sign in
-              </Link>
+              </Link1>
             </Grid>
           </Grid>
         {/* </form> */}

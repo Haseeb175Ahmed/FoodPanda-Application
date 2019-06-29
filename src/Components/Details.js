@@ -63,7 +63,7 @@ render() {
             
           </header>
 
-          <div>
+          <div className = "column">
           <div className="online_food_delivery_box animated bounceInDown" id="input_box">
           <center> <p><img src={require("../images/11.png")}  className= "img"/> 
           <h1> {this.props.Title}</h1></p></center><br/>

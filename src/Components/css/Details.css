@@ -107,6 +107,7 @@ h1
     margin-bottom: 60px;
     padding: 20px 40px;
     background-color: #d4c0b9;
+    max-width: 60%;
     box-shadow: 3px 5px 10px #714c4a;
 }
 .result_box {
@@ -129,3 +130,32 @@ h1
     font-size: 26px;
     text-align: center;
 }
+
+@media screen and (max-width: 400px) {
+    .online_food_delivery_box  {
+        margin-top: 20px;
+        margin-left: 350px;
+        margin-right: 350px;
+        margin-bottom: 50px;
+        padding: 20px 40px;
+        background-color: #d4c0b9;
+        box-shadow: 3px 5px 10px #714c4a;
+      max-width: 50%;
+      -ms-flex: 50%;
+      flex: 50%;
+    }
+  }
+  
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 585px) {
+    .online_food_delivery_box  {
+        margin-top: 20px;
+        margin-left: 350px;
+        margin-right: 350px;
+        margin-bottom: 60px;
+        padding: 20px 40px;
+        background-color: #d4c0b9;
+        box-shadow: 3px 5px 10px #714c4a;
+      max-width: 100%;
+    }
+  }

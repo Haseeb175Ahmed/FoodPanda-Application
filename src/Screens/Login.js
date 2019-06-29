@@ -21,6 +21,7 @@ class Start extends React.Component {
     
             this.props.history.push('/RestarauntRegistration');
               }
+              
 
 
 

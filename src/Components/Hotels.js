@@ -23,6 +23,7 @@ class DisplayResturants extends React.Component {
         Orders : [],
         toggle : false,
        title : "",
+       filterData: []
         
     }
 
@@ -125,28 +126,29 @@ class DisplayResturants extends React.Component {
          //For Sorting Police data name
        
           //Filtering data from police
-          for (let index = 0; index < data.length; index++) {
-            let data1 = data[index].fullName.filter((elem) => {
-                return  console.log(data1);
-               //   elem.name.substr(0, text.length).toLowerCase().match(text.toLowerCase())
+          
+            let data1 = data.filter((elem) => {
+                return elem.fullName.substr(0, text.length).toLowerCase().match(text.toLowerCase())
               })
-              this.setState({data :data1 , text});
+              this.setState({filterData :data1});
   
-              console.log(data1);
+              console.log(data);
               
-          }
+         
    
            
     }
    
 render() {
-    const{data,Orders,toggle,title} = this.state
+    const{data,toggle,title,filterData} = this.state
     var temp = [...data]
     temp.length = this.state.limit;
+    const showData = (filterData.length > 0) ? filterData : data
 
-    console.log("Detaisls2",toggle)
-   
-    const display = data.map((value,index) => {
+    console.log("ShowData",showData)
+    
+
+    const display = showData.map((value,index) => {
         return   (
          <center>
                 <div className="column"> <br/><br/>
@@ -183,6 +185,7 @@ render() {
                                    
                                     <div className="col">
                                         <input className="form-control form-control-lg form-control-borderless" id = "search"
+                                         onChange = {this.search.bind(this)}
                                          type="search" placeholder="Search Resturants or keywords"
                                         />
                                     </div>

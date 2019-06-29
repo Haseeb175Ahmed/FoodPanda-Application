@@ -6,6 +6,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import Dashboard from '../src/Components/DashBoard'
 
+
+
 // import food from './food.png'
 // import food2 from './food2.jpg'
 import UserRegistrationForm from '../src/Components/UserRegistrationForm'

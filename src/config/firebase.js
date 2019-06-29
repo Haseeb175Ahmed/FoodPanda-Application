@@ -39,6 +39,7 @@ class Login extends React.Component {
    
         var email = document.getElementById("email1").value;
         var password = document.getElementById("password1").value;
+        var user = document.getElementById("user").value;
     
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((success) => {   
@@ -54,14 +55,14 @@ class Login extends React.Component {
                 .then(() => {
                     let userUid = firebase.auth().currentUser.uid;
                    
-                    var db = firebase.database().ref('Users/' + userUid+'/Orders');
+                    var db = firebase.database().ref("Orders/"+userUid);
                     db.on('value', function(snapshot) {
                     
-                     if (snapshot.val() != null) {
+                     if (snapshot.val() != null ) {
                          var Orders = Object.values(snapshot.val());
                          console.log("Orders;111;",snapshot.val());
                          localStorage.setItem("Orders", JSON.stringify(Orders));
-                         
+                        //  console.log(this.props);
                      }
                    
                         })
@@ -90,6 +91,10 @@ class Login extends React.Component {
               
                <div className="white-box">
                    <div className='signup-childs'>
+                   <select className="form-control" id="user">
+                      <option value="Resturants"> Resturants</option>
+                      <option value="Costumers">Costumers </option>
+                      </select><br/>
                       <strong>Email</strong><br/>
                       <input id="email1" placeholder='Enter email' type = 'text'/>
                    </div>
@@ -182,6 +187,7 @@ export default Login
                 });
             }
 
+           
 
 
             function RestaurauntForm(){
@@ -223,9 +229,12 @@ export default Login
                             
                              
                             .then(() => {
+                                
                     
-                         
+
                           })
+
+                         
             
                    })
                })
@@ -243,10 +252,11 @@ export default Login
                     text: "You can use this email to procceed more features",
                     icon: "success",
                     button: "Done",
-                })
-                .then(() => {
+
                     
                 })
+                this.props.history.push('/login');
+                
                 // this.props.history.push('/login');
             })
         
@@ -283,7 +293,8 @@ export default Login
                     
              } 
              let userUid = firebase.auth().currentUser.uid;
-             firebase.database().ref('Users/' + userUid+"/Orders/").set(orderobj)
+             orderobj.uid = userUid;
+             firebase.database().ref("Orders/"+ + userUid).set(orderobj)
              .then(() => {   
                  swal({
                      title: "Welcome",
@@ -335,6 +346,10 @@ function GetResturants()
      })
  
   }
+
+   
+
+
         export {Login,UserForm,RestaurauntForm,GetResturants,Orders}
 
            
